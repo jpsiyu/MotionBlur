@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Translating : MonoBehaviour {
 
-    private float distance = 3.0f;
+    public float distance = 3.0f;
     private float interval = 0.3f;
     private float timeRecord = 0f;
     private int r;

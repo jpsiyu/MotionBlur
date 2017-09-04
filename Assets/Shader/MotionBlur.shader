@@ -5,19 +5,19 @@ Shader "Custom/Motion Blur" {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_BlurAmount ("Blur Amount", Float) = 1.0
 	}
+
+	CGINCLUDE	
+	ENDCG
+
 	SubShader {
 		CGINCLUDE
-		
 		#include "UnityCG.cginc"
-		
 		sampler2D _MainTex;
 		fixed _BlurAmount;
-		
 		struct v2f {
 			float4 pos : SV_POSITION;
 			half2 uv : TEXCOORD0;
 		};
-		
 		v2f vert(appdata_img v) {
 			v2f o;
 			
