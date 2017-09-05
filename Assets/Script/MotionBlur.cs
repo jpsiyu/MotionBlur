@@ -7,6 +7,10 @@ public class MotionBlur : PostEffectsBase
     public Shader motionBlurShader;
     private Material motionBlurMaterial = null;
 
+    private void Awake() {
+        EventManager.Instance.AddListener<BlurSwitchEvent>(ReceBlurEvent);
+    }
+
     public Material material
     {
         get
@@ -52,5 +56,9 @@ public class MotionBlur : PostEffectsBase
         {
             Graphics.Blit(src, dest);
         }
+    }
+
+    private void ReceBlurEvent(BlurSwitchEvent blurEvent) {
+        enabled = blurEvent.EventMsg == "open";
     }
 }

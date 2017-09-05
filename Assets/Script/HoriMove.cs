@@ -17,6 +17,7 @@ public class HoriMove : MonoBehaviour {
     private Vector3 temp = Vector3.zero;
     private float backTime = 2f;
     private float backTimeCounter = 0f;
+    private bool sendClose = false;
 
     private enum MechineState {
         Prepare,
@@ -29,6 +30,7 @@ public class HoriMove : MonoBehaviour {
     protected void Start()
     {
         ms = MechineState.Prepare;
+        EventManager.Instance.Send(new BlurSwitchEvent("open"));
     }
 
     protected void Update()
@@ -104,6 +106,11 @@ public class HoriMove : MonoBehaviour {
     }
 
     protected void BackToOrigin() {
+        if (!sendClose) {
+            EventManager.Instance.Send(new BlurSwitchEvent("close"));
+            sendClose = true;
+        }
+
         if (temp == Vector3.zero)
             temp = transform.localPosition;
         if (backTimeCounter >= backTime)
@@ -114,6 +121,7 @@ public class HoriMove : MonoBehaviour {
     }
 
     protected void EndMove() {
+
     }
 
     private Vector3 RandomDir() {
