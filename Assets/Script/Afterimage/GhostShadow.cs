@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GhostShadow : MonoBehaviour {
 
-    public float duration = 0.5f;
-    public float interval = 0.5f;
+    private float duration = 0.5f;
+    private float interval = 0.3f;
     private float lastTime = 0f;
     private Vector3 lastPos = Vector3.zero;
 
@@ -21,9 +21,13 @@ public class GhostShadow : MonoBehaviour {
     }
 
     private void Update() {
-        if (lastPos == transform.position) return;
+        if (lastPos == transform.position)
+            return;
         lastPos = transform.position;
-        if (Time.time - lastTime < interval) return;
+
+        if (Time.time - lastTime < interval)
+            return;
+
         lastTime = Time.time;
         if (meshRender == null) return;
         for (int i = 0; i < meshRender.Length; i++)

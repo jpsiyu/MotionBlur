@@ -15,7 +15,6 @@ public class GhostItem : MonoBehaviour {
         else if (meshRenderer.material) {
             float rate = tempTime / duration;
             Color cal = meshRenderer.material.GetColor("_RimColor");
-            Debug.LogError(cal);
             cal.a *= rate;
             meshRenderer.material.SetColor("_RimColor", cal);
         }
