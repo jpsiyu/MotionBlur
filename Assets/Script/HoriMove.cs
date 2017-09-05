@@ -8,17 +8,21 @@ public class HoriMove : MonoBehaviour {
     private float prepareWaitCounter = 0f;
     private float chaosTime = 0.2f;
     private float chaosTimeCounter = 0f;
-    private int chaosRound = 10;
+    private int chaosRound = 5;
     private int chaosRoundCounter = 0;
     private Vector3 chaosDir = Vector3.zero;
-    private float horiMoveTime = 3f;
+    private float horiMoveTime = 1f;
     private float horiMoveTimeCounter = 0f;
-    private float chaosDistance = 80f;
+    private float chaosDistance = 40f;
+    private Vector3 temp = Vector3.zero;
+    private float backTime = 2f;
+    private float backTimeCounter = 0f;
 
     private enum MechineState {
         Prepare,
         Chaos,
         Horizontal,
+        Back2Origin,
         End,
     }
 
@@ -43,6 +47,9 @@ public class HoriMove : MonoBehaviour {
             case MechineState.Horizontal:
                 HorizontalMove();
                 break;
+            case MechineState.Back2Origin:
+                BackToOrigin();
+                break;
             case MechineState.End:
                 EndMove();
                 break;
@@ -58,6 +65,8 @@ public class HoriMove : MonoBehaviour {
         else if (ms == MechineState.Chaos && msg == "chaos_end")
             ms = MechineState.Horizontal;
         else if (ms == MechineState.Horizontal && msg == "hori_end")
+            ms = MechineState.Back2Origin;
+        else if (ms == MechineState.Back2Origin && msg == "back_end")
             ms = MechineState.End;
     }
 
@@ -82,7 +91,7 @@ public class HoriMove : MonoBehaviour {
             MechineMsg("chaos_end");
         }
 
-        transform.localPosition = Vector3.Lerp(Vector3.zero, chaosDir, chaosTime);
+        transform.localPosition = Vector3.Lerp(Vector3.zero, chaosDir, chaosTimeCounter/chaosTime);
         chaosTimeCounter += Time.deltaTime;
     }
 
@@ -90,12 +99,21 @@ public class HoriMove : MonoBehaviour {
         if (horiMoveTimeCounter >= horiMoveTime)
             MechineMsg("hori_end");
 
-        transform.localPosition = Vector3.Lerp(Vector3.zero, new Vector3(Screen.width / 4, 0, 0), horiMoveTime);
+        transform.localPosition = Vector3.Lerp(Vector3.zero, new Vector3(Screen.width / 4, 0, 0), horiMoveTimeCounter/horiMoveTime);
         horiMoveTimeCounter += Time.deltaTime;
     }
 
-    protected void EndMove() {
+    protected void BackToOrigin() {
+        if (temp == Vector3.zero)
+            temp = transform.localPosition;
+        if (backTimeCounter >= backTime)
+            MechineMsg("back_end");
 
+        transform.localPosition = Vector3.Lerp(temp, Vector3.zero, backTimeCounter/backTime);
+        backTimeCounter += Time.deltaTime;
+    }
+
+    protected void EndMove() {
     }
 
     private Vector3 RandomDir() {
