@@ -69,6 +69,7 @@ public class Disappear : MonoBehaviour {
     }
 
     private void UpdateOffset() {
+        image.material.SetFloat("_CenterY", transform.localPosition.y);
         image.material.SetFloat("_Offset", offset);
     }
 
@@ -79,6 +80,7 @@ public class Disappear : MonoBehaviour {
     private void FadeOut() {
         if (fadeTimeCounter >= fadeTime) {
             transform.localPosition += new Vector3(Random.Range(-distance, distance), Random.Range(-distance, distance), 0);
+            UpdateOffset();
             fadeTimeCounter = 0;
             MechineMsg("out_end");
             return;

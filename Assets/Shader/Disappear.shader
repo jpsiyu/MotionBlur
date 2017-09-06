@@ -4,6 +4,7 @@ Shader "Custom/Cutaway"
 	{
 		_MainTex ("Texture", 2D) = "white" {}
         _Offset("Offset", Float) = 0
+		_CenterY("CenterY", Float) = 0
 	}
 	SubShader
 	{
@@ -11,12 +12,14 @@ Shader "Custom/Cutaway"
 			Cull Off
 			CGPROGRAM
             #include "UnityCG.cginc"
+			#include "UnityUI.cginc"
 			#pragma vertex vert
 			#pragma fragment frag
 
             sampler2D _MainTex;
             float4 _ClipRect;
             float _Offset;
+			float _CenterY;
 			struct a2v{
 				float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
@@ -34,9 +37,11 @@ Shader "Custom/Cutaway"
 				return o;
 			}
 			float4 frag(v2f i) : COLOR{
-				if(i.posInObjectCoords.y > _Offset)
+				if(i.posInObjectCoords.y - _CenterY > _Offset)
 					discard;
                 float4 color = tex2D(_MainTex, i.uv);
+				color.a *= UnityGet2DClipping(i.pos.xy, _ClipRect);
+				clip(color.a - 0.001);
 				return color;
 			}
 
