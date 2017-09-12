@@ -74,5 +74,18 @@ public class UIManager{
         }
     }
 
-    public void Close(ViewBase view) { }
+    public void Close<T>() where T : ViewBase {
+        System.Type t = typeof(T);
+        ViewBase view = viewStack.Peek();
+        if (view == null){
+            throw new System.ArgumentException("not a view exit");
+        }
+        else if (view.GetType() != t) {
+            throw new System.ArgumentException("close a view not at top");
+        }
+        else {
+            viewStack.Pop();
+            GameObject.Destroy(view.gameObject);
+        }
+    }
 }

@@ -6,6 +6,7 @@ public class Launcher : MonoBehaviour {
 
     private void Start() {
         BoostUI();
+        BoostTools();
         BoostFinish();
     }
 
@@ -18,8 +19,12 @@ public class Launcher : MonoBehaviour {
         ViewPathDefinition.Init();
     }
 
+    private void BoostTools() {
+        gameObject.AddComponent<MonoBehaviourTool>();
+    }
+
     private void BoostFinish() {
-        GameObject.Destroy(this.gameObject);
+        GameObject.Destroy(this);
         MainViewController.Open();
     }
 }
