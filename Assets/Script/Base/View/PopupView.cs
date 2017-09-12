@@ -3,16 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PopupView : IViewBase {
+public class PopupView : ViewBase {
     #region interface
-    public void Close() {
+    public virtual void Close() {
     }
 
-    public void Open() {
+    public virtual void Open() {
     }
 
-    public EViewType ViewType() {
-        return EViewType.Popup;
-    }
     #endregion
 }

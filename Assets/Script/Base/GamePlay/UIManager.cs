@@ -16,14 +16,63 @@ public class UIManager{
     #endregion singleton
 
     private GameObject uiRootGameObj;
+    private Transform layerNormal;
+    private Transform layerPopup;
+
+    private Stack<ViewBase> viewStack = new Stack<ViewBase>();
+    private void Mount2UILayer(EViewType e, GameObject gameObj) {
+        switch (e)
+        {
+            case EViewType.Normal:
+                gameObj.transform.parent = layerNormal;
+                break;
+            case EViewType.Popup:
+                gameObj.transform.parent = layerPopup;
+                break; ;
+            default:
+                break;
+        }
+        gameObj.transform.localPosition = Vector3.zero;
+        gameObj.transform.localScale = Vector3.one;
+    }
+
+    private ViewBase Contains(System.Type t) {
+        foreach (ViewBase view in viewStack) {
+            if (view.GetType() == t)
+                return view;
+        }
+        return null;
+    }
+
     public GameObject UIRootGameObj {
         set {
-            if (uiRootGameObj != null) {
+            if (uiRootGameObj == null) {
                 uiRootGameObj = value;
+                layerNormal = uiRootGameObj.transform.Find("UILayers/LayerNormal");
+                layerPopup = uiRootGameObj.transform.Find("UILayers/LayerPopup");
             }
         }
     }
 
-    private Stack<IViewBase> viewStack = new Stack<IViewBase>();
+    public void Open<T>() where T: ViewBase{
+        System.Type t = typeof(T);
+        ViewBase view = Contains(t);
 
+        if (view != null){
+            view.gameObject.SetActive(true);
+        }
+        else {
+            ViewPathStr str = ViewPathDefinition.GetStr(t);
+            if (str.IsNull()) {
+                throw new MissingReferenceException("view path is null");
+            }
+            Object prefab = Resources.Load(str.path);
+            GameObject gameObj = GameObject.Instantiate(prefab) as GameObject;
+            Mount2UILayer(str.eViewType, gameObj);
+            view = gameObj.AddComponent<T>();
+            viewStack.Push(view);
+        }
+    }
+
+    public void Close(ViewBase view) { }
 }

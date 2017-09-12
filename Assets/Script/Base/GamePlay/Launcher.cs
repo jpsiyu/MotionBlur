@@ -14,9 +14,12 @@ public class Launcher : MonoBehaviour {
         GameObject gameObj = GameObject.Instantiate(prefab) as GameObject;
         DontDestroyOnLoad(gameObj);
         UIManager.Instance.UIRootGameObj = gameObj;
+
+        ViewPathDefinition.Init();
     }
 
     private void BoostFinish() {
         GameObject.Destroy(this.gameObject);
+        MainViewController.Open();
     }
 }
