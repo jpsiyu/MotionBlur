@@ -56,6 +56,42 @@ public class UIManager{
         return null;
     }
 
+    private void ViewPush(EViewType e) {
+        if (e == EViewType.Normal) {
+            foreach (ViewBase view in viewStack) {
+                if (view.gameObject.activeInHierarchy)
+                    view.gameObject.SetActive(false);
+            }
+        }
+        else if (e == EViewType.Popup) {
+            bool meetNormal = false;
+            foreach (ViewBase view in viewStack) {
+                if (meetNormal && view.gameObject.activeInHierarchy)
+                    view.gameObject.SetActive(false);
+                else if (!view.gameObject.activeInHierarchy)
+                    view.gameObject.SetActive(true);
+
+                ViewPathStr st = ViewPathDefinition.GetStr(view.GetType());
+                if (st.eViewType == EViewType.Normal)
+                    meetNormal = true;
+            }
+        }
+    }
+
+    private void ViewPop(EViewType e) {
+        if (e == EViewType.Normal) {
+            bool meetNormal = false;
+            foreach (ViewBase view in viewStack) {
+                if (!meetNormal && !view.gameObject.activeInHierarchy)
+                    view.gameObject.SetActive(true);
+
+                ViewPathStr st = ViewPathDefinition.GetStr(view.GetType());
+                if (st.eViewType == EViewType.Normal)
+                    meetNormal = true;
+            }
+        }
+    }
+
     public GameObject UIRootGameObj {
         set {
             if (uiRootGameObj == null) {
@@ -70,12 +106,15 @@ public class UIManager{
     public void Open<T>() where T: ViewBase{
         System.Type t = typeof(T);
         ViewBase view = Contains(t);
+        ViewPathStr str = ViewPathDefinition.GetStr(t);
+        ViewPush(str.eViewType);
+
 
         if (view != null){
             view.gameObject.SetActive(true);
+            viewStack.Push(view);
         }
         else {
-            ViewPathStr str = ViewPathDefinition.GetStr(t);
             if (str.IsNull()) {
                 throw new MissingReferenceException("view path is null");
             }
@@ -99,6 +138,8 @@ public class UIManager{
         else {
             viewStack.Pop();
             GameObject.Destroy(view.gameObject);
+            ViewPathStr str = ViewPathDefinition.GetStr(t);
+            ViewPop(str.eViewType);
         }
     }
 }
