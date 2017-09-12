@@ -16,7 +16,7 @@ public class Launcher : MonoBehaviour {
         DontDestroyOnLoad(gameObj);
         UIManager.Instance.UIRootGameObj = gameObj;
 
-        ViewPathDefinition.Init();
+        ViewPropertyDefinition .Init();
     }
 
     private void BoostTools() {

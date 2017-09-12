@@ -71,7 +71,7 @@ public class UIManager{
                 else if (!view.gameObject.activeInHierarchy)
                     view.gameObject.SetActive(true);
 
-                ViewPathStr st = ViewPathDefinition.GetStr(view.GetType());
+                ViewPropertySt st = ViewPropertyDefinition .GetSt(view.GetType());
                 if (st.eViewType == EViewType.Normal)
                     meetNormal = true;
             }
@@ -85,7 +85,7 @@ public class UIManager{
                 if (!meetNormal && !view.gameObject.activeInHierarchy)
                     view.gameObject.SetActive(true);
 
-                ViewPathStr st = ViewPathDefinition.GetStr(view.GetType());
+                ViewPropertySt st = ViewPropertyDefinition .GetSt(view.GetType());
                 if (st.eViewType == EViewType.Normal)
                     meetNormal = true;
             }
@@ -106,7 +106,7 @@ public class UIManager{
     public void Open<T>() where T: ViewBase{
         System.Type t = typeof(T);
         ViewBase view = Contains(t);
-        ViewPathStr str = ViewPathDefinition.GetStr(t);
+        ViewPropertySt str = ViewPropertyDefinition .GetSt(t);
         ViewPush(str.eViewType);
 
 
@@ -138,7 +138,7 @@ public class UIManager{
         else {
             viewStack.Pop();
             GameObject.Destroy(view.gameObject);
-            ViewPathStr str = ViewPathDefinition.GetStr(t);
+            ViewPropertySt str = ViewPropertyDefinition .GetSt(t);
             ViewPop(str.eViewType);
         }
     }
