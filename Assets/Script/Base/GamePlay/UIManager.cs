@@ -18,6 +18,7 @@ public class UIManager{
     private GameObject uiRootGameObj;
     private Transform layerNormal;
     private Transform layerPopup;
+    private Camera uiCamera;
 
     private Stack<ViewBase> viewStack = new Stack<ViewBase>();
     private void Mount2UILayer(EViewType e, GameObject gameObj) {
@@ -34,6 +35,17 @@ public class UIManager{
         }
         gameObj.transform.localPosition = Vector3.zero;
         gameObj.transform.localScale = Vector3.one;
+
+        if (e == EViewType.Normal)
+            AnchorMax(gameObj);
+    }
+
+    private void AnchorMax(GameObject gameObj) {
+        RectTransform rect = gameObj.GetComponent<RectTransform>();
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
     }
 
     private ViewBase Contains(System.Type t) {
@@ -50,6 +62,7 @@ public class UIManager{
                 uiRootGameObj = value;
                 layerNormal = uiRootGameObj.transform.Find("UILayers/LayerNormal");
                 layerPopup = uiRootGameObj.transform.Find("UILayers/LayerPopup");
+                uiCamera = uiRootGameObj.transform.Find("UICamera").GetComponent<Camera>();
             }
         }
     }

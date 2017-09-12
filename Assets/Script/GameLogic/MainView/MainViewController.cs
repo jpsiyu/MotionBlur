@@ -5,7 +5,7 @@ using UnityEngine;
 public static class MainViewController {
     public static void Open() {
         UIManager.Instance.Open<MainView>();
-        MonoBehaviourTool.Instance.MBStartCoroutine(CloseCor());
+        //MonoBehaviourTool.Instance.MBStartCoroutine(CloseCor());
     }
 
     public static void Close() {

@@ -24,6 +24,7 @@ public static class ViewPathDefinition{
     public static void Init() {
         dict = new Dictionary<System.Type, ViewPathStr>();
         dict.Add(typeof(MainView), new ViewPathStr(typeof(MainView), "Prefab/MainView", EViewType.Normal));
+        dict.Add(typeof(ChooseLevelView), new ViewPathStr(typeof(ChooseLevelView), "Prefab/ChooseLevelView", EViewType.Normal));
     }
 
     public static ViewPathStr GetStr(System.Type t) {
