@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChooseLevelView : ViewBase {
+public class TipsView : ViewBase {
     private Text textClose;
 
     private void Awake() {
@@ -19,6 +19,7 @@ public class ChooseLevelView : ViewBase {
     }
 
     private void OnTextCloseClick() {
-        ChooseLevelController.Close();
+        TipsViewController.Close();
     }
+
 }
