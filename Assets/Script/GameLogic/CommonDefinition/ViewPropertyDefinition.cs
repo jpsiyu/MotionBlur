@@ -23,9 +23,9 @@ public static class ViewPropertyDefinition {
 
     public static void Init() {
         dict = new Dictionary<System.Type, ViewPropertySt>();
-        dict.Add(typeof(MainView), new ViewPropertySt(typeof(MainView), "Prefab/MainView", EViewType.Normal));
-        dict.Add(typeof(ChooseLevelView), new ViewPropertySt(typeof(ChooseLevelView), "Prefab/ChooseLevelView", EViewType.Normal));
-        dict.Add(typeof(TipsView), new ViewPropertySt(typeof(TipsView), "Prefab/TipsView", EViewType.Popup));
+        dict.Add(typeof(MainView), new ViewPropertySt(typeof(MainView), "Assets.GameResources.Prefab.MainView.prefab", EViewType.Normal));
+        dict.Add(typeof(ChooseLevelView), new ViewPropertySt(typeof(ChooseLevelView), "Assets.GameResources.Prefab.ChooseLevelView.prefab", EViewType.Normal));
+        dict.Add(typeof(TipsView), new ViewPropertySt(typeof(TipsView), "Assets.GameResources.Prefab.TipsView.prefab", EViewType.Popup));
     }
 
     public static ViewPropertySt GetSt(System.Type t) {

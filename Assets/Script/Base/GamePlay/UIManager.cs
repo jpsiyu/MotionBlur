@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tangzx.ABSystem;
 
 public class UIManager{
     #region singleton
@@ -22,17 +23,8 @@ public class UIManager{
 
     private Stack<ViewBase> viewStack = new Stack<ViewBase>();
     private void Mount2UILayer(EViewType e, GameObject gameObj) {
-        switch (e)
-        {
-            case EViewType.Normal:
-                gameObj.transform.parent = layerNormal;
-                break;
-            case EViewType.Popup:
-                gameObj.transform.parent = layerPopup;
-                break; ;
-            default:
-                break;
-        }
+        Transform parent = e == EViewType.Normal ? layerNormal : layerPopup;
+        gameObj.transform.SetParent(parent);
         gameObj.transform.localPosition = Vector3.zero;
         gameObj.transform.localScale = Vector3.one;
 
@@ -118,11 +110,12 @@ public class UIManager{
             if (str.IsNull()) {
                 throw new MissingReferenceException("view path is null");
             }
-            Object prefab = Resources.Load(str.path);
-            GameObject gameObj = GameObject.Instantiate(prefab) as GameObject;
-            Mount2UILayer(str.eViewType, gameObj);
-            view = gameObj.AddComponent<T>();
-            viewStack.Push(view);
+            AssetBundleManager.Instance.Load(str.path, (abi) => {
+                GameObject gameObj = GameObject.Instantiate(abi.mainObject) as GameObject;
+                Mount2UILayer(str.eViewType, gameObj);
+                view = gameObj.AddComponent<T>();
+                viewStack.Push(view);
+            });
         }
     }
 
