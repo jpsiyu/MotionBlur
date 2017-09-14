@@ -12,4 +12,7 @@ public static class ChooseLevelController {
         UIManager.Instance.Close<ChooseLevelView>();
     }
 
+    public static List<LevelInfo> GetLevelInfo() {
+        return ChooseLevelModel.Instance.GetLevelInfo();
+    }
 }

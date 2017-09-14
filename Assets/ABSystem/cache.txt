@@ -1,8 +1,8 @@
 0.1.0
 Assets\GameResources\Prefab\ChooseLevelView.prefab
-a71ab456ebee99c0fddcc6f3bd5d9f41bf2ec01b
+395d25a62afbf628c2682c45c5928ed2040db48b
 0
-aabfed7cf5174788ef9507b290c68057
+9947760c1009f29bf88e23f70fd7a52a
 0
 Assets\GameResources\Prefab\Human.prefab
 102ecfa6e47879b4c49b1eb932f3e2ff9ecd2db7
@@ -10,9 +10,9 @@ Assets\GameResources\Prefab\Human.prefab
 2a8268a1813402fc5faf37b5e6b4b28f
 0
 Assets\GameResources\Prefab\MainView.prefab
-0bbc4720e681777cc9a362b67eb3b6dd28324200
+3e796c7316186fa9df8999692ebe904e89c90bf9
 0
-b1752f4af8074a504dbad991721a24ae
+98fe1b8e76b4d295bbc73e82f11c67f6
 0
 Assets\GameResources\Prefab\TipsView.prefab
 0c0529feaf9e57b08b460a5ed73ffff103abfbee
@@ -20,9 +20,9 @@ Assets\GameResources\Prefab\TipsView.prefab
 12020229a283227902634d397b5e1569
 0
 Assets\GameResources\Prefab\UIRoot.prefab
-3134574247d265127e43f9158d180c805743a92a
+1ac799be8dbe36e88b06036792a97f2fbc8096fb
 0
-c0ef08b4b9ed881389092ac5618312e8
+a9f36ff63cab935df7b76ee2029b59a0
 0
 Assets\GameResources\Material\AdditiveBlend.mat
 ccf3da800e90f8eb0d956803d83a57b33b7ea990

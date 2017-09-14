@@ -19,6 +19,7 @@ public class UIManager{
     private GameObject uiRootGameObj;
     private Transform layerNormal;
     private Transform layerPopup;
+    private GameObject alphaMask;
     private Camera uiCamera;
 
     private Stack<ViewBase> viewStack = new Stack<ViewBase>();
@@ -48,7 +49,7 @@ public class UIManager{
         return null;
     }
 
-    private void ViewPush(EViewType e) {
+    private void AfterPush(EViewType e) {
         if (e == EViewType.Normal) {
             foreach (ViewBase view in viewStack) {
                 if (view.gameObject.activeInHierarchy)
@@ -70,7 +71,7 @@ public class UIManager{
         }
     }
 
-    private void ViewPop(EViewType e) {
+    private void AfterPop(EViewType e) {
         if (e == EViewType.Normal) {
             bool meetNormal = false;
             foreach (ViewBase view in viewStack) {
@@ -84,12 +85,25 @@ public class UIManager{
         }
     }
 
+    private void IfUseMask() {
+        if (viewStack.Count <= 0)
+            return;
+        ViewBase v = viewStack.Peek();
+        ViewPropertySt str = ViewPropertyDefinition.GetSt(v.GetType());
+        EViewType e = str.eViewType;
+        if (e == EViewType.Popup && !alphaMask.activeInHierarchy)
+            alphaMask.SetActive(true);
+        else if (e == EViewType.Normal && alphaMask.activeInHierarchy)
+            alphaMask.SetActive(false);
+    }
+
     public GameObject UIRootGameObj {
         set {
             if (uiRootGameObj == null) {
                 uiRootGameObj = value;
                 layerNormal = uiRootGameObj.transform.Find("UILayers/LayerNormal");
                 layerPopup = uiRootGameObj.transform.Find("UILayers/LayerPopup");
+                alphaMask = uiRootGameObj.transform.Find("UILayers/LayerPopup/AlphaMask").gameObject;
                 uiCamera = uiRootGameObj.transform.Find("UICamera").GetComponent<Camera>();
             }
         }
@@ -99,7 +113,7 @@ public class UIManager{
         System.Type t = typeof(T);
         ViewBase view = Contains(t);
         ViewPropertySt str = ViewPropertyDefinition .GetSt(t);
-        ViewPush(str.eViewType);
+        AfterPush(str.eViewType);
 
 
         if (view != null){
@@ -115,6 +129,7 @@ public class UIManager{
                 Mount2UILayer(str.eViewType, gameObj);
                 view = gameObj.AddComponent<T>();
                 viewStack.Push(view);
+                IfUseMask();
             });
         }
     }
@@ -132,7 +147,8 @@ public class UIManager{
             viewStack.Pop();
             GameObject.Destroy(view.gameObject);
             ViewPropertySt str = ViewPropertyDefinition .GetSt(t);
-            ViewPop(str.eViewType);
+            AfterPop(str.eViewType);
+            IfUseMask();
         }
     }
 }
