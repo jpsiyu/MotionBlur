@@ -109,6 +109,11 @@ Assets\GameResources\Image\bg2_ditu.jpg
 0
 59521038b44db9d48be546dbaefe8752
 0
+Assets\GameResources\Image\flag2_zhujue_touxiang4.png
+089e66c9aabfc35fe32a9d981c45982ff58d4e08
+0
+11c87b9a1184f7f0dbc68a0439a21d21
+0
 Assets\Shader\AdditiveBlend.shader
 5b05e9c24633a38dcb19477727647bf2eb064836
 0

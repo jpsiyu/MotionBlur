@@ -22,5 +22,9 @@ namespace Tangzx.ABSystem
         public bool valid = true;
         public string path = string.Empty;
         public string filter = "*.prefab";
+
+        public string[] MultiFilter() {
+            return filter.Split(',');
+        }
     }
 }
