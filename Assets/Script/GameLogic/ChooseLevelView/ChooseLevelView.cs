@@ -16,19 +16,19 @@ public class ChooseLevelView : ViewBase {
     private IEnumerator Start() {
         List<LevelInfo> levelInfo = ChooseLevelController.GetLevelInfo();
         for (int i = 0; i < levelInfo.Count; i++) {
-            GenLevelItem(levelInfo[i].id.ToString());
+            GenLevelItem(levelInfo[i]);
             yield return new WaitForEndOfFrame();
         }
         yield return null;
     }
 
-    private GameObject GenLevelItem(string text) {
+    private GameObject GenLevelItem(LevelInfo lvInfo) {
         GameObject gameObj = GameObject.Instantiate(item);
         SimpleComponentUtil.SetParent(content, gameObj.transform);
         Text texComp = gameObj.transform.Find("Image/Text").GetComponent<Text>();
-        texComp.text = text;
+        texComp.text = lvInfo.id.ToString();
         GameObject imgGameObj = gameObj.transform.Find("Image").gameObject;
-        EventListener.Get(imgGameObj).onPointerClick = delegate { TipsViewController.Open(); };
+        EventListener.Get(imgGameObj).onPointerClick = delegate { lvInfo.openLvView(); } ;
         gameObj.SetActive(true);
         return gameObj;
     }
