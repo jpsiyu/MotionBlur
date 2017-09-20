@@ -22,10 +22,10 @@ public class MainView : NormalView {
     }
 
     private void OnImgClick() {
-        ChooseLevelController.Open();
+        ChooseLevelCtrl.Open();
     }
 
     private void OnImgClick2() {
-        TipsViewController.Open();
+        TipsViewCtrl.Open();
     }
 }

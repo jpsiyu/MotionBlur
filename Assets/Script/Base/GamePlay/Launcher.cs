@@ -41,6 +41,6 @@ public class Launcher : MonoBehaviour {
 
     private void BoostFinish() {
         GameObject.Destroy(this);
-        MainViewController.Open();
+        MainViewCtrl.Open();
     }
 }

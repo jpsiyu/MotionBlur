@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class TipsViewController {
+public static class TipsViewCtrl {
 
     public static void Open() {
         UIManager.Instance.Open<TipsView>();

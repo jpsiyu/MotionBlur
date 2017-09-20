@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 
 public class ChooseLevelModel{
+    private int levelNum;
     private static ChooseLevelModel _instance;
     private List<LevelInfo> levelInfoList;
 
@@ -20,15 +21,21 @@ public class ChooseLevelModel{
     }
 
     private ChooseLevelModel() {
+        levelNum = 0;
         levelInfoList = new List<LevelInfo>();
         InitLevelInfo();
     }
 
     private void InitLevelInfo() {
+        levelInfoList.Add(new LevelInfo(LvTakePlace(), delegate { UIManager.Instance.Open<Level01View>(); }));
+
         for (int i = 0; i < 15; i++) {
-            LevelInfo li = new LevelInfo(i, delegate { UIManager.Instance.Open<TipsView>(); });
-            levelInfoList.Add(li);
+            levelInfoList.Add(new LevelInfo(LvTakePlace(), delegate { UIManager.Instance.Open<TipsView>(); }));
         }
+    }
+
+    private int LvTakePlace() {
+        return levelNum++;
     }
 }
 

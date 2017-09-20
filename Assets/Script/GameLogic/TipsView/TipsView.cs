@@ -19,7 +19,7 @@ public class TipsView : ViewBase {
     }
 
     private void OnTextCloseClick() {
-        TipsViewController.Close();
+        TipsViewCtrl.Close();
     }
 
 }

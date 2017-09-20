@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class MainViewController {
+public static class MainViewCtrl {
     public static void Open() {
         UIManager.Instance.Open<MainView>();
         //MonoBehaviourTool.Instance.MBStartCoroutine(CloseCor());

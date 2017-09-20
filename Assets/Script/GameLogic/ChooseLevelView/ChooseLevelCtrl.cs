@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ChooseLevelController {
+public static class ChooseLevelCtrl {
 
     public static void Open() {
         UIManager.Instance.Open<ChooseLevelView>();

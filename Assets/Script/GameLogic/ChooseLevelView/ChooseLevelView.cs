@@ -14,7 +14,7 @@ public class ChooseLevelView : ViewBase {
     }
 
     private IEnumerator Start() {
-        List<LevelInfo> levelInfo = ChooseLevelController.GetLevelInfo();
+        List<LevelInfo> levelInfo = ChooseLevelCtrl.GetLevelInfo();
         for (int i = 0; i < levelInfo.Count; i++) {
             GenLevelItem(levelInfo[i]);
             yield return new WaitForEndOfFrame();
@@ -43,6 +43,6 @@ public class ChooseLevelView : ViewBase {
     }
 
     private void OnTextCloseClick() {
-        ChooseLevelController.Close();
+        ChooseLevelCtrl.Close();
     }
 }
