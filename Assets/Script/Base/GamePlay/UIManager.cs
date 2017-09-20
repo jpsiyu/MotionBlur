@@ -97,6 +97,12 @@ public class UIManager{
             alphaMask.SetActive(false);
     }
 
+    private void AddCameraMotionBlur() {
+        MotionBlur mb = uiCamera.gameObject.AddComponent<MotionBlur>();
+        mb.motionBlurShader = Shader.Find("Custom/Motion Blur");
+        mb.blurAmount = 0.9f;
+    }
+
     public GameObject UIRootGameObj {
         set {
             if (uiRootGameObj == null) {
@@ -105,6 +111,7 @@ public class UIManager{
                 layerPopup = uiRootGameObj.transform.Find("UILayers/LayerPopup");
                 alphaMask = uiRootGameObj.transform.Find("UILayers/LayerPopup/AlphaMask").gameObject;
                 uiCamera = uiRootGameObj.transform.Find("UICamera").GetComponent<Camera>();
+                AddCameraMotionBlur();
             }
         }
     }
