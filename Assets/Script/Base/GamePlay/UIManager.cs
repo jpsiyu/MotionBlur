@@ -101,6 +101,7 @@ public class UIManager{
         MotionBlur mb = uiCamera.gameObject.AddComponent<MotionBlur>();
         mb.motionBlurShader = Shader.Find("Custom/Motion Blur");
         mb.blurAmount = 0.9f;
+        EventManager.Instance.Send(new BlurSwitchEvent("close"));
     }
 
     public GameObject UIRootGameObj {
