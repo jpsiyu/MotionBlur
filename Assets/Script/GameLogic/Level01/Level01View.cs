@@ -5,6 +5,7 @@ using UnityEngine;
 public class Level01View : ViewBase {
 
     private GameObject offset;
+    private HoriMove horiMove;
 
     private void Awake() {
         BindUI();
@@ -13,11 +14,16 @@ public class Level01View : ViewBase {
 
     private void BindUI() {
         offset = transform.Find("offset").gameObject;
-        offset.AddComponent<HoriMove>();
+        horiMove = offset.AddComponent<HoriMove>();
     }
 
     private void BindEvent() {
 
+    }
+
+    private void Start() {
+        horiMove.SetEndAction(delegate { Level01Ctrl.Close(); });
+        horiMove.StartMove();
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HoriMove : MonoBehaviour {
-    private MechineState ms;
+    private MechineState ms = MechineState.Sleep;
     private float prepareWait = 1f;
     private float prepareWaitCounter = 0f;
     private float chaosTime = 0.2f;
@@ -18,8 +18,10 @@ public class HoriMove : MonoBehaviour {
     private float backTime = 2f;
     private float backTimeCounter = 0f;
     private bool sendClose = false;
+    private System.Action endAction;
 
     private enum MechineState {
+        Sleep,
         Prepare,
         Chaos,
         Horizontal,
@@ -27,18 +29,23 @@ public class HoriMove : MonoBehaviour {
         End,
     }
 
-    protected void Start()
+
+    public void StartMove()
     {
         ms = MechineState.Prepare;
         EventManager.Instance.Send(new BlurSwitchEvent("open"));
     }
 
-    protected void Update()
+    public void SetEndAction(System.Action anAction) {
+        endAction = anAction;
+    }
+
+    private void Update()
     {
         MechineRun();
     }
 
-    protected void MechineRun() {
+    private void MechineRun() {
         switch (ms) {
             case MechineState.Prepare:
                 Prepare();
@@ -53,15 +60,14 @@ public class HoriMove : MonoBehaviour {
                 BackToOrigin();
                 break;
             case MechineState.End:
-                EndMove();
+                EndEvent();
                 break;
             default:
-                EndMove();
                 break;
         }
     }
 
-    protected void MechineMsg(string msg) {
+    private void MechineMsg(string msg) {
         if (ms == MechineState.Prepare && msg == "prepare_finish")
             ms = MechineState.Chaos;
         else if (ms == MechineState.Chaos && msg == "chaos_end")
@@ -72,13 +78,13 @@ public class HoriMove : MonoBehaviour {
             ms = MechineState.End;
     }
 
-    protected void Prepare() {
+    private void Prepare() {
         if (prepareWaitCounter > prepareWait)
             MechineMsg("prepare_finish");
         prepareWaitCounter += Time.deltaTime;
     }
 
-    protected void ChaosMove() {
+    private void ChaosMove() {
         if (chaosDir == Vector3.zero)
             chaosDir = RandomDir();
 
@@ -97,7 +103,7 @@ public class HoriMove : MonoBehaviour {
         chaosTimeCounter += Time.deltaTime;
     }
 
-    protected void HorizontalMove() {
+    private void HorizontalMove() {
         if (horiMoveTimeCounter >= horiMoveTime)
             MechineMsg("hori_end");
 
@@ -105,7 +111,7 @@ public class HoriMove : MonoBehaviour {
         horiMoveTimeCounter += Time.deltaTime;
     }
 
-    protected void BackToOrigin() {
+    private void BackToOrigin() {
         if (!sendClose) {
             EventManager.Instance.Send(new BlurSwitchEvent("close"));
             sendClose = true;
@@ -120,8 +126,10 @@ public class HoriMove : MonoBehaviour {
         backTimeCounter += Time.deltaTime;
     }
 
-    protected void EndMove() {
-
+    private void EndEvent() {
+        ms = MechineState.Sleep;
+        if (endAction != null)
+            endAction();
     }
 
     private Vector3 RandomDir() {
