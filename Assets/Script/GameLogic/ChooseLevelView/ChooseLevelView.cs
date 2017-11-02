@@ -27,8 +27,10 @@ public class ChooseLevelView : ViewBase {
         SimpleComponentUtil.SetParent(content, gameObj.transform);
         Text texComp = gameObj.transform.Find("Image/Text").GetComponent<Text>();
         texComp.text = lvInfo.id.ToString();
+
         GameObject imgGameObj = gameObj.transform.Find("Image").gameObject;
-        EventListener.Get(imgGameObj).onPointerClick = delegate { lvInfo.openLvView(); } ;
+        imgGameObj.GetComponent<Button>().onClick.AddListener( delegate { lvInfo.openLvView(); });
+
         gameObj.SetActive(true);
         return gameObj;
     }
