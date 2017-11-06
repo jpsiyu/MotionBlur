@@ -11,9 +11,9 @@ Assets\GameResources\Prefab\Human.prefab
 2a8268a1813402fc5faf37b5e6b4b28f
 0
 Assets\GameResources\Prefab\Level01.prefab
-20773160b333bb78a4ee400e365e8d37235f8349
+61b0d214138dd74d68bd212e7841d788df4a9616
 0
-78c1048757ff641a040a699552a3007e
+07d7fa1f913fabf434d9a9ef7158fcf2
 1
 Assets\GameResources\Image\ImgSubway.jpg
 Assets\GameResources\Prefab\MainView.prefab
@@ -22,6 +22,12 @@ f3f3e76743b7be8431cd45335b6b3b7bb3d68ac9
 6653f0d2943e3e4dc83a15a9f403e912
 1
 Assets\GameResources\Image\ImgSubway2.jpg
+Assets\GameResources\Prefab\Player.prefab
+92a85f66be0d69c6e2fe4b21b85ac15fdc59f4e5
+0
+fcb3b85782079f5d970d15bdd8a7fd39
+1
+Assets\GameResources\Image\child.png
 Assets\GameResources\Prefab\TipsView.prefab
 d43b09f50a9a207671fea1e6ce36eb7a490b1c1a
 0
@@ -137,6 +143,11 @@ Assets\GameResources\Image\ImgSubway4.jpg
 05fa91675b632ab28ac850ff1b1bf7b5fb581e70
 0
 52de0bfde6f2ce0c7dfcad84de99ac05
+0
+Assets\GameResources\Image\child.png
+2df79a574f931418118846ecf4be567f33dd72aa
+0
+b30fba3e893fd7636660509f09419e6f
 0
 Assets\GameResources\Image\flag2_zhujue_touxiang4.png
 089e66c9aabfc35fe32a9d981c45982ff58d4e08
