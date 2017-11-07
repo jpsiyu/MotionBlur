@@ -27,6 +27,7 @@ public static class ViewPropertyDefinition {
         dict.Add(typeof(ChooseLevelView), new ViewPropertySt(typeof(ChooseLevelView), AssetPathDefinition.prefabRoot + "ChooseLevelView.prefab", EViewType.Normal));
         dict.Add(typeof(TipsView), new ViewPropertySt(typeof(TipsView), AssetPathDefinition.prefabRoot + "TipsView.prefab", EViewType.Popup));
         dict.Add(typeof(Level01View), new ViewPropertySt(typeof(Level01View), AssetPathDefinition.prefabRoot + "Level01.prefab", EViewType.Normal));
+        dict.Add(typeof(GameResultView), new ViewPropertySt(typeof(GameResultView), AssetPathDefinition.prefabRoot + "GameResultView.prefab", EViewType.Popup));
     }
 
     public static ViewPropertySt GetSt(System.Type t) {

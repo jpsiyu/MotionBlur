@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameResultCtrl : MonoBehaviour {
+public static class GameResultCtrl  {
+    public static void Open() {
+        UIManager.Instance.Open<GameResultView>();
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static void Close() {
+        UIManager.Instance.Close<GameResultView>();
+    }
 }

@@ -77,11 +77,13 @@ public class Level01View : ViewBase {
     }
 
     private void UnSafe() {
-        Level01Ctrl.Close();
+        //Level01Ctrl.Close();
+        GameResultCtrl.Open();
     }
 
     private void Safe() {
-        Level01Ctrl.Close();
+        GameResultCtrl.Open();
+        //Level01Ctrl.Close();
     }
 
 }
