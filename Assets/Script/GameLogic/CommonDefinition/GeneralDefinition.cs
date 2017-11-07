@@ -11,3 +11,8 @@ public static class Tags {
     public static string safety = "safety";
     public static string unsafety = "unsafety";
 }
+
+public enum EGameResult {
+    Win,
+    Lose,
+}
