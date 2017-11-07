@@ -32,7 +32,7 @@ public class Launcher : MonoBehaviour {
             ViewPropertyDefinition.Init();
             BoostAfterUI();
         };
-        AssetBundleManager.Instance.Load("Assets.GameResources.Prefab.UIRoot.prefab", handler);
+        AssetBundleManager.Instance.Load(AssetPathDefinition.uiRoot, handler);
     }
 
     private void BoostTools() {
