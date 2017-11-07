@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class TipsView : ViewBase {
     private Text textClose;
@@ -18,7 +19,7 @@ public class TipsView : ViewBase {
         EventListener.Get(textClose.gameObject).onPointerClick = OnTextCloseClick;
     }
 
-    private void OnTextCloseClick() {
+    private void OnTextCloseClick(PointerEventData eventData) {
         TipsViewCtrl.Close();
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ChooseLevelView : ViewBase {
     private Text textClose;
@@ -44,7 +45,7 @@ public class ChooseLevelView : ViewBase {
         EventListener.Get(textClose.gameObject).onPointerClick = OnTextCloseClick;
     }
 
-    private void OnTextCloseClick() {
+    private void OnTextCloseClick(PointerEventData eventData) {
         ChooseLevelCtrl.Close();
     }
 }

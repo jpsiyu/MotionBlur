@@ -5,14 +5,16 @@ using UnityEngine.EventSystems;
 
 public class EventListener : EventTrigger {
 
-    public delegate void EventDelegate();
+    public delegate void EventDelegate(PointerEventData eventData);
+    public delegate void BaseEventDelegate(BaseEventData eventData);
+
     public EventDelegate onPointerClick;
     public EventDelegate onPointerDown;
     public EventDelegate onPointerEnter;
     public EventDelegate onPointerExit;
     public EventDelegate onPointerUp;
-    public EventDelegate onSelect;
-    public EventDelegate onUpdateSelected;
+    public BaseEventDelegate onSelect;
+    public BaseEventDelegate onUpdateSelected;
 
     public static EventListener Get(GameObject gameObj) {
         EventListener listener = gameObj.GetComponent<EventListener>();
@@ -23,36 +25,36 @@ public class EventListener : EventTrigger {
 
     public override void OnPointerClick(PointerEventData eventData) {
         if (onPointerClick != null)
-            onPointerClick();
+            onPointerClick(eventData);
     }
 
     public override void OnPointerDown(PointerEventData eventData) {
         if (onPointerDown != null)
-            onPointerDown();
+            onPointerDown(eventData);
     }
 
     public override void OnPointerEnter(PointerEventData eventData) {
         if (onPointerEnter != null)
-            onPointerEnter();
+            onPointerEnter(eventData);
     }
 
     public override void OnPointerExit(PointerEventData eventData) {
         if (onPointerExit != null)
-            onPointerExit();
+            onPointerExit(eventData);
     }
 
     public override void OnPointerUp(PointerEventData eventData) {
         if (onPointerUp != null)
-            onPointerUp();
+            onPointerUp(eventData);
     }
 
     public override void OnSelect(BaseEventData eventData) {
         if (onSelect != null)
-            onSelect();
+            onSelect(eventData);
     }
 
     public override void OnUpdateSelected(BaseEventData eventData) {
         if (onUpdateSelected != null)
-            onUpdateSelected();
+            onUpdateSelected(eventData);
     }
 }
