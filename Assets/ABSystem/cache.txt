@@ -30,9 +30,9 @@ f3f3e76743b7be8431cd45335b6b3b7bb3d68ac9
 1
 Assets\GameRes\Image\ImgSubway2.jpg
 Assets\GameRes\Prefab\Player.prefab
-92a85f66be0d69c6e2fe4b21b85ac15fdc59f4e5
+8b1d2ef0af327688d09d4e382f95fd5845f4971e
 0
-ddd9a3638a4aef69c6825b7c03661bfb
+346f871b2bc4057a79568b0f17ff6d96
 1
 Assets\GameRes\Image\child.png
 Assets\GameRes\Prefab\TipsView.prefab
@@ -42,9 +42,9 @@ c3c3d827905c8ac31c9cb5b6e68d3dc3
 1
 Assets\GameRes\Image\ImgSubway4.jpg
 Assets\GameRes\Prefab\UIRoot.prefab
-3fe115faf2941d6319caa3aeab1f6f23575b2f95
+060029787617cc06a2fa8b37b1e03d596bc71374
 0
-5856e4194c991efda5d945203c567035
+13303bbda313b62bc313578dfc9207c6
 0
 Assets\GameRes\Material\AdditiveBlend.mat
 ccf3da800e90f8eb0d956803d83a57b33b7ea990
