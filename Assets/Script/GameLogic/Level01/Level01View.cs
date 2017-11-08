@@ -77,13 +77,18 @@ public class Level01View : ViewBase {
     }
 
     private void UnSafe() {
-        //Level01Ctrl.Close();
         GameResultCtrl.Lose();
+        StartCoroutine(Leave());
     }
 
     private void Safe() {
         GameResultCtrl.Win();
-        //Level01Ctrl.Close();
+        StartCoroutine(Leave());
     }
 
+    private IEnumerator Leave() {
+        yield return new WaitForSeconds(3);
+        GameResultCtrl.Close();
+        Level01Ctrl.Close();
+    }
 }
